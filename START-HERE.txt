@@ -1,0 +1,16 @@
+HAJRIBANAO – GITHUB PAGES READY WEBSITE
+======================================
+1. Open this folder: hajribanao
+2. Upload the CONTENTS to the root of a new GitHub repo.
+3. Settings > Pages > Deploy from branch > main / (root).
+4. In assets/config.js change YOUR DEVELOPER NAME and YOUR_EMAIL@example.com.
+5. Also change those placeholders in support/legal HTML pages.
+6. Open the GitHub Pages HTTPS URL in a browser and test attendance, salary and backup.
+7. Use that same HTTPS URL inside a Java Android WebView app.
+
+Package name suggestion: com.hajribanao.app
+
+IMPORTANT: Employee information lives on the DEVICE only, not on GitHub. Browser
+and Android WebView have separate local storage. JSON backup is the only built-in
+restore method; CSV/JSON downloads and printing inside standard WebView require
+additional Java code. See README.md and ANDROID-NOTES.md.

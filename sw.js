@@ -1,0 +1,6 @@
+/* Offline cache contains only app pages and static assets; employee records stay in localStorage. */
+const VERSION='hajribanao-cache-v1';
+const ASSETS=['./','./index.html','./assets/app.mjs','./assets/core.mjs','./assets/store.mjs','./assets/config.js','./assets/icons.mjs','./assets/base.css','./assets/hajri.css','./assets/legal.css','./assets/icon.svg','./assets/icon-192.png','./assets/icon-512.png','./manifest.webmanifest','./privacy.html','./delete-data.html','./help.html','./terms.html','./about.html','./contact.html'];
+self.addEventListener('install',e=>e.waitUntil(caches.open(VERSION).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting())));
+self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('hajribanao-')&&k!==VERSION).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
+self.addEventListener('fetch',e=>{const r=e.request;if(r.method!=='GET'||new URL(r.url).origin!==self.location.origin)return;e.respondWith(fetch(r).then(response=>{if(response.ok){const copy=response.clone();caches.open(VERSION).then(c=>c.put(r,copy)).catch(()=>{});}return response;}).catch(()=>caches.match(r).then(hit=>hit||Response.error())));});
